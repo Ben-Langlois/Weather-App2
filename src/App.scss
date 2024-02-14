@@ -2,36 +2,22 @@
   text-align: center;
 
   .App-header {
-    // background-color: #282c34;
-    // min-height: 100vh;
     display: flex;
-    // flex-direction: column;
     align-items: center;
     justify-content: center;
-    // height: 10vh;
-    // font-size: calc(10px + 2vmin);
-    // color: white;
-
-    // input#autocomplete{
-    //   margin: 3vh auto;
-    //   width: 50%;
-    //   font-size: calc(10px + 2vmin);
-    //   text-align: center;
-    // }
-
 
     .geocoder-container{
       margin: 2.5vh;
-      // padding-top: 2.5vh !important;
-      // padding-bottom: 2.5vh !important;
       width: 60% !important;
 
       input{
-        // margin: 3vh 0 0 0;
-        // width: 50% !important;
         font-size: 1.5rem;
         text-align: center;
       }
     }
+  }
+
+  #dashboard{
+
   }
 }
