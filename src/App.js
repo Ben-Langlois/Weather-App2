@@ -7,20 +7,69 @@ import './App.scss';
 import { GeoapifyGeocoderAutocomplete, GeoapifyContext } from '@geoapify/react-geocoder-autocomplete'
 import '@geoapify/geocoder-autocomplete/styles/minimal.css'
 
-var autocompleteKey = '62e93b34c2ee4337b92e9b81d777029a';
-
-
+const autocompleteKey = '62e93b34c2ee4337b92e9b81d777029a';
+const openWeatherKey = 'ad46bca0cb15937504da590a8559bbae';
 
 const WeatherApp2 = () => {
   const [city, setCity] = useState('');
+  const [country, setCountry] = useState('');
+  const [long, setLong] = useState('');
+  const [lat, setLat] = useState('');
   
+
   // componentDidMount (essentially)
   useEffect (() => {
-    console.log('Mounted?')
+    console.log('Mounted?');
   }, []);
+
+  useEffect (() => {
+    console.log('location selected');
+  }, [long, lat])
 
   const onPlaceSelect = (value) => {
     console.log(value);
+
+    // clicking the 'x' button also counts as a place selected
+    if(value) {  // this ensures actual place is selected
+      // storing long/lat
+      setLong(value.properties.lon);
+      setLat(value.properties.lat);
+
+      handleSubmit();  // pass vals to api func
+    } 
+  }
+
+  // Handles submission of location to second API
+  const handleSubmit = () => {
+    fetch(`http://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&units=metric&exclude=alerts&appid=${openWeatherKey}`)
+    .then(response => response.json())
+    .then(data => {     // storing desired API data in state
+        console.log(data.current);
+        // pooling values in an object so they're readable and state isnt just a top level eval 
+        // const propObj = {current: {...data.current}, daily: [...data.daily], hourly: [...data.hourly]};
+
+        // this.setState({     // pulling from obj above 
+        //   main: propObj.current.weather[0].main,
+        //   desc: propObj.current.weather[0].desc,
+        //   id: propObj.current.weather[0].id,
+        //   dt: propObj.current.dt,
+        //   clouds: propObj.current.clouds,
+        //   feelsLike: Math.round(propObj.current.feels_like),
+        //   humidity: propObj.current.humidity,
+        //   pressure: propObj.current.pressure,
+        //   sunrise: propObj.current.sunrise,
+        //   sunset: propObj.current.sunset,
+        //   temp: Math.round(propObj.current.temp),
+        //   uvi: propObj.current.uvi,
+        //   windspeed: propObj.current.windspeed,
+        //   zoneShift: data.timezone_offset,          
+
+        //   daily: propObj.daily,
+        //   hourly: propObj.hourly.slice(0, 24)                   // limiting to 24 hours
+        })
+      .catch(err => {
+        console.error('Call Failed', err)
+      })
   }
 
   return (
@@ -40,7 +89,7 @@ const WeatherApp2 = () => {
           </GeoapifyContext>          
       </header>
       <div id='dashboard'>
-
+        {long}&nbsp;{lat}
       </div>
     </div>
   );
