@@ -1,8 +1,18 @@
-.App {
-  text-align: center;
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
 
-  .App-header {
+#App {
+  text-align: center;
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+
+  #search-bar {
     display: flex;
+    flex: 0 1 auto;
     align-items: center;
     justify-content: center;
 
@@ -18,6 +28,13 @@
   }
 
   #dashboard{
+    flex: 1 1 auto;
 
+    #default{
+      // display: flex;
+    }
+    #daily{
+      display: none;
+    }
   }
 }
