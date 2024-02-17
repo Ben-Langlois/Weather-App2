@@ -22,8 +22,13 @@ const WeatherApp2 = () => {
     console.log('Mounted?');
   }, []);
 
-  useEffect (() => {
+  // componentDidUpdate
+  useEffect (() => {    // Long/Lat updates
     console.log('location selected');
+
+    if(lat && long){   // once vals exist (app calls it once mounted aswell oops)
+      handleSubmit();  // pass vals to api func
+    }
   }, [long, lat])
 
   const onPlaceSelect = (value) => {
@@ -34,9 +39,7 @@ const WeatherApp2 = () => {
       // storing long/lat
       setLong(value.properties.lon);
       setLat(value.properties.lat);
-
-      handleSubmit();  // pass vals to api func
-    } 
+    }
   }
 
   // Handles submission of location to second API
