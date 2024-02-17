@@ -11,7 +11,7 @@ const autocompleteKey = '62e93b34c2ee4337b92e9b81d777029a';
 const openWeatherKey = 'ad46bca0cb15937504da590a8559bbae';
 
 const WeatherApp2 = () => {
-  const [location, setCity] = useState('');
+  const [location, setLocation] = useState('');
   const [long, setLong] = useState('');
   const [lat, setLat] = useState('');
   const [wData, setwData] = useState({});
@@ -23,18 +23,18 @@ const WeatherApp2 = () => {
 
   // componentDidUpdate
   useEffect (() => {    // Long/Lat updates
-    // console.log('location selected');
-
     if(lat && long){   // once vals exist (app calls it once mounted aswell oops)
-    console.log('location selected');
+      console.log('location selected');
 
       handleSubmit();  // pass vals to api func
     }
   }, [long, lat])
 
-  // does this even work?!
   useEffect(() => {     // Weather Data updates
-
+    if(!$.isEmptyObject(wData)){
+      $('#default').css('display', 'none');
+      $('#daily').css('display', 'flex');  
+    }
   }, [wData]);
 
   const onPlaceSelect = (value) => {
@@ -42,9 +42,9 @@ const WeatherApp2 = () => {
 
     // on location select (not 'x')
     if(value) {  // this ensures actual place is selected
-      // storing long/lat
       setLong(value.properties.lon);
       setLat(value.properties.lat);
+      setLocation(value.properties.formatted);
     }
   }
 
@@ -75,10 +75,6 @@ const WeatherApp2 = () => {
         hourly: data.hourly.slice(0, 24)                   // limiting to 24 hours
       })
     })
-    .then(() => {   // display dashboard
-      $('#default').css('display', 'none');
-      $('#daily').css('display', 'flex');  
-    })
     .catch(err => {
       console.error('Call Failed', err)
     })
@@ -105,7 +101,11 @@ const WeatherApp2 = () => {
           The default dash, where the desc, icon, etc will go
         </div>
         <div id='daily'>
+          {location}<br/>
           {wData.temp}
+        </div>
+        <div id='weekly'>
+          This is where weekly data will be displayed
         </div>
       </div>
     </div>

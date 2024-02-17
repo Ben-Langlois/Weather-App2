@@ -1,14 +1,8 @@
-html,
-body {
-  height: 100%;
-  margin: 0;
-}
-
 #App {
   text-align: center;
   display: flex;
   flex-flow: column;
-  height: 100%;
+  height: 100vh;
 
   #search-bar {
     display: flex;
@@ -29,12 +23,23 @@ body {
 
   #dashboard{
     flex: 1 1 auto;
+    display: grid;
+    grid-template-rows: 2.5fr 1fr;
+    justify-content: center;
 
     #default{
       // display: flex;
+      width: 60% !important;
+
     }
     #daily{
       display: none;
+      width: 60% !important;
+
+    }
+
+    #weekly{
+      // width: 100%;
     }
   }
 }
