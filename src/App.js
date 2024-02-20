@@ -33,7 +33,7 @@ const WeatherApp2 = () => {
   useEffect(() => {     // Weather Data updates
     if(!$.isEmptyObject(wData)){
       $('#default').css('display', 'none');
-      $('#daily').css('display', 'flex');  
+      // $('#daily').css('display', 'flex');  
     }
   }, [wData]);
 
@@ -97,10 +97,21 @@ const WeatherApp2 = () => {
           </GeoapifyContext>          
       </header>
       <div id='dashboard'>
-        <div id='default'>
-          The default dash, where the desc, icon, etc will go
-        </div>
+
         <div id='daily'>
+          <div id='default'>
+            <img src='' id='' alt='...'/>
+            <p>            
+            The default dash, where the desc, icon, etc will goLorem ipsum dolor sit amet, 
+            consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore 
+            magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco 
+            laboris nisi ut aliquip ex ea commodo consequat. 
+            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum 
+            dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, 
+            sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+          </div>
+
           {location}<br/>
           {wData.temp}
         </div>

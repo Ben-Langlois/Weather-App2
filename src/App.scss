@@ -12,7 +12,7 @@
 
     .geocoder-container{
       margin: 2.5vh;
-      width: 60% !important;
+      width: 50vw !important;
 
       input{
         font-size: 1.5rem;
@@ -25,21 +25,30 @@
     flex: 1 1 auto;
     display: grid;
     grid-template-rows: 2.5fr 1fr;
-    justify-content: center;
+    justify-items: center;
 
-    #default{
-      // display: flex;
-      width: 60% !important;
-
-    }
     #daily{
-      display: none;
-      width: 60% !important;
+      width: 50vw !important;
 
+      #default{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      height: 100%;
+
+        img{
+          width: 30%;
+        }
+        p{
+          display: flex;
+          width: 50%;
+          font-size: 1.5rem;
+        }
+      }
     }
 
     #weekly{
-      // width: 100%;
+      width: 100vw;
     }
   }
 }
