@@ -118,8 +118,16 @@ const WeatherApp2 = () => {
             </div>
           </div>
 
-          {location}<br/>
-          {wData.temp}
+          <div id='main'>
+            <img src={icons.clearDay} alt=''/>
+            <p id='temp'>{wData.temp}<p class='degree'>&#8451;</p></p>
+          </div>
+          <div id='details'>
+            {location}
+          </div>
+          <div id='hourly'>
+            
+          </div>
         </div>
         <div id='weekly'>
           This is where weekly data will be displayed

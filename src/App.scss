@@ -24,7 +24,7 @@
   #dashboard{
     flex: 1 1 auto;
     display: grid;
-    grid-template-rows: 2.5fr 1fr;
+    grid-template-rows: 2.3fr 1fr;
     justify-items: center;
 
     #daily{
@@ -32,15 +32,38 @@
       grid-template-areas: 
         "main details"
         "hourly hourly";
+      grid-template-columns: 1.5fr 2fr;
+      grid-template-rows: 1.3fr 1fr;
       width: 50vw !important;
+      border: 1px solid rgba(0,0,0,.125);             // shorten to shorthand ?
+
+      #main{
+        grid-area: main;
+        display: flex;
+        justify-content: center;
+
+        img{
+          width: 40%;
+        }
+        p{
+          display: flex;
+          font-size: 5vw;
+          margin: auto 0;
+        }
+      }
+      #details{
+        grid-area: details;
+      }
+      #hourly{
+        grid-area: hourly;
+      }
 
       #default{
-        display: grid;
+        display: none;
         z-index: 1;
         grid-area: daily;
         width: 100%;
         margin: 0 auto 0;
-        border: 1px solid rgba(0,0,0,.125);             // shorten to shorthand ?
         grid-template-columns: 50% 50%;
         grid-template-areas: 
           "icon title"
@@ -105,4 +128,10 @@
       width: 100vw;
     }
   }
+
+  p.degree{
+    font-size: 40% !important;
+    margin: 20% 0 0 0 !important;
+  }
+
 }
