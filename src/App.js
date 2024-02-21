@@ -8,6 +8,8 @@ import '@geoapify/geocoder-autocomplete/styles/minimal.css'
 
 const autocompleteKey = '62e93b34c2ee4337b92e9b81d777029a';
 const openWeatherKey = 'ad46bca0cb15937504da590a8559bbae';
+var weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
 
 const WeatherApp2 = () => {
   const [location, setLocation] = useState('');
@@ -79,6 +81,29 @@ const WeatherApp2 = () => {
     })
   }
 
+  /*  getTime
+    params
+      {dt}: unix time thingy
+      {shift}: zone-shift variable 
+      {rv}: return value
+    returns
+      {date}: shortened converted date (11:30, 03:20 etc)
+  */
+  const getTime = (dt, rv) => {
+    let time = dt * 1000,
+        date = new Date(time);
+
+    if(rv === 'time'){  // if user requests the time
+      if(date.getHours() > 12){
+        return (date.getMinutes() < 10 ? `${date.getHours() - 12}:0${date.getMinutes()} pm` : `${date.getHours() - 12}:${date.getMinutes()} pm`)
+      } else {
+        return (date.getMinutes() < 10 ? `${date.getHours()}:0${date.getMinutes()} am` : `${date.getHours()}:${date.getMinutes()} am`)
+      }
+    } else if(rv == 'day'){  // if user requests the day 
+      return weekdays.slice(date.getDay(), date.getDay() + 1) // returns day of the week corresponding to dt
+    }
+  }
+
   return (
     <div id="App">
       <header id="search-bar">
@@ -120,13 +145,17 @@ const WeatherApp2 = () => {
 
           <div id='main'>
             <img src={icons.clearDay} alt=''/>
-            <p id='temp'>{wData.temp}<p class='degree'>&#8451;</p></p>
+            <h1 id='temp'>{wData.temp}<p class='degree'>&#8451;</p></h1>
           </div>
           <div id='details'>
             {location}
           </div>
+          <div id='stats'>
+            <h3 id='feelsLike'>Feels like {wData.feelsLike}<p class='degree'>&#8451;</p></h3>
+            <h3 id='asOf'>As of {getTime(wData.dt, 'time')}</h3>
+          </div>
           <div id='hourly'>
-            
+            Chart will go here
           </div>
         </div>
         <div id='weekly'>

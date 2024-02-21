@@ -31,11 +31,16 @@
       display: grid;
       grid-template-areas: 
         "main details"
+        "stats stats"
         "hourly hourly";
-      grid-template-columns: 1.5fr 2fr;
-      grid-template-rows: 1.3fr 1fr;
-      width: 50vw !important;
+      grid-template-columns: 50% 50%;
+      grid-template-rows: 45% 20% 35%;
+            width: clamp(760px,50vw,1200px);
       border: 1px solid rgba(0,0,0,.125);             // shorten to shorthand ?
+
+      div{
+        border: 1px solid red;
+      }
 
       #main{
         grid-area: main;
@@ -43,19 +48,53 @@
         justify-content: center;
 
         img{
-          width: 40%;
-        }
-        p{
-          display: flex;
-          font-size: 5vw;
+          width: 50%;
           margin: auto 0;
+        }
+        #temp{
+          display: flex;
+          font-size: 3.5rem;
+          margin: auto 0;
+        }               
+      }
+
+      #stats{
+        grid-area: stats;
+        display: grid;
+        grid-template:
+        "feels etc"
+        "asof etc";
+        grid-template-columns: 50% 50%;
+        grid-template-rows: 50% 50%;
+
+        #feelsLike{
+          grid-area: feels;
+          display: flex;
+          justify-content: center;
+          margin: 0;
+          font-size: 2rem;
+           
+          .degree{
+            margin: 0;
+          }
+        }   
+
+        #asOf{
+          grid-area: asof;
+          margin: 0;
+        }
+
+        #etc{
+          grid-area: etc;
         }
       }
       #details{
         grid-area: details;
+
       }
       #hourly{
         grid-area: hourly;
+
       }
 
       #default{
@@ -131,7 +170,7 @@
 
   p.degree{
     font-size: 40% !important;
-    margin: 20% 0 0 0 !important;
+    margin: 20% 0 0 0;
   }
 
 }
