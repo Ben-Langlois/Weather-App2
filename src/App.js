@@ -1,9 +1,8 @@
 // import logo from './logo.svg';
 import React, { useState, useEffect } from 'react';
 import './App.scss';
-// import React from 'react';
 import $ from 'jquery';
-// import * as icons from './icons/icons.js';
+import * as icons from './icons/icons.js';
 import { GeoapifyGeocoderAutocomplete, GeoapifyContext } from '@geoapify/react-geocoder-autocomplete'
 import '@geoapify/geocoder-autocomplete/styles/minimal.css'
 
@@ -97,19 +96,26 @@ const WeatherApp2 = () => {
           </GeoapifyContext>          
       </header>
       <div id='dashboard'>
-
         <div id='daily'>
           <div id='default'>
-            <img src='' id='' alt='...'/>
-            <p>            
-            The default dash, where the desc, icon, etc will goLorem ipsum dolor sit amet, 
-            consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore 
-            magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco 
-            laboris nisi ut aliquip ex ea commodo consequat. 
-            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum 
-            dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, 
-            sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
+            <div id='icon'>
+              <img src={icons.clearDay} alt=''/>
+            </div>
+            <div id='title'>
+              <h1>Weather<br/>App II</h1>
+            </div>
+            <div id='desc'>
+              <p>
+                A Weather Dashboard application, created by <a href='https://ben-langlois.github.io/Portfolio/'>Ben Langlois</a>, aimed to display weather statistics for inputted city. The application is
+                built in React and SASS, it utilizes multiple APIs such as: <a href='https://www.geoapify.com/address-autocomplete'>GeoApify</a>, and <a href='https://openweathermap.org/api/one-call-3'>OpenWeatherMap API</a>.<br/><br/>
+                The application allows users to search for the weather in a specific city and displays the current weather conditions along with hourly and weekly 
+                forecasts. Cards display temperatures and various stats such as: humidity, precipitation, sunrise/set etc.
+              </p>
+              <div id='socials'>
+                <a href='https://github.com/Ben-Langlois/Weather-App2'><img src={icons.github}/></a>
+                <a href='https://www.linkedin.com/in/benjaminlanglois/'><img src={icons.linkedin}/></a>
+              </div>
+            </div>
           </div>
 
           {location}<br/>

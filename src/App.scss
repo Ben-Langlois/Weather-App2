@@ -28,21 +28,75 @@
     justify-items: center;
 
     #daily{
+      display: grid;
+      grid-template-areas: 
+        "main details"
+        "hourly hourly";
       width: 50vw !important;
 
       #default{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      height: 100%;
+        display: grid;
+        z-index: 1;
+        grid-area: daily;
+        width: 100%;
+        margin: 0 auto 0;
+        border: 1px solid rgba(0,0,0,.125);             // shorten to shorthand ?
+        grid-template-columns: 50% 50%;
+        grid-template-areas: 
+          "icon title"
+          "desc desc";
 
-        img{
-          width: 30%;
+        #icon{
+          grid-area: icon;
+
+          img{
+            width: 80%;
+            display: flex;
+            margin: 0 auto;
+          }
         }
-        p{
+
+        #title{
+          grid-area: title;
           display: flex;
-          width: 50%;
-          font-size: 1.5rem;
+          align-items: center;
+
+          h1{
+            display: inline-block;
+            margin: 0;
+            font-weight: bold;          // shorthand dis
+            font-size: 3.5rem;
+          }
+        }
+        
+        #desc{
+          grid-area: desc;
+          padding: 0 5%;
+          
+          p{
+            font-size: 1.5rem;
+          }
+
+          a{
+            color: #000000;
+
+            &:hover{
+              font-weight: bold;
+            }
+          }
+
+          #socials{
+            display: flex;
+            justify-content: center;
+            gap: 1vw;
+            margin-bottom: 1rem;                
+
+            a{  
+              img{
+                width: 3rem;
+              }       
+            }
+          }
         }
       }
     }
