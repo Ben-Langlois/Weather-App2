@@ -148,11 +148,30 @@ const WeatherApp2 = () => {
             <h1 id='temp'>{wData.temp}<p class='degree'>&#8451;</p></h1>
           </div>
           <div id='details'>
-            {location}
+            <h1 id='desc'>{wData.main}</h1>
+            <h2 id='location'>{location}</h2>
           </div>
           <div id='stats'>
             <h3 id='feelsLike'>Feels like {wData.feelsLike}<p class='degree'>&#8451;</p></h3>
             <h3 id='asOf'>As of {getTime(wData.dt, 'time')}</h3>
+            <div id='etc'>
+              <div id='uvi' className='etc' title='Cloud Coverage'> {/* should eventually convert css to reflect actual value*/}
+                <img src={icons.clouds} alt='...' />
+                <p>{wData.clouds} %</p>
+              </div>
+              <div id='hum' className='etc' title='Humidity'> 
+                <img src={icons.humidity} alt='...'/>
+                <p>{wData.humidity} %</p> 
+              </div>      
+              <div id='sunr' className='etc' title='Sunrise'>
+                <img src={icons.sunrise} alt='...'/>
+                <p>{getTime(wData.sunrise, 'time')}</p>
+              </div>
+              <div id='suns' className='etc' title='Sunset'>
+                <img src={icons.sunset} alt='...'/>
+                <p>{getTime(wData.sunset, 'time')}</p>
+              </div>   
+            </div>
           </div>
           <div id='hourly'>
             Chart will go here

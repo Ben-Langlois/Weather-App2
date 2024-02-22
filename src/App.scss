@@ -34,13 +34,13 @@
         "stats stats"
         "hourly hourly";
       grid-template-columns: 50% 50%;
-      grid-template-rows: 45% 20% 35%;
+      grid-template-rows: 45% 15% 40%;
             width: clamp(760px,50vw,1200px);
       border: 1px solid rgba(0,0,0,.125);             // shorten to shorthand ?
 
-      div{
-        border: 1px solid red;
-      }
+      // div{
+      //   border: 1px solid red;
+      // }
 
       #main{
         grid-area: main;
@@ -58,6 +58,25 @@
         }               
       }
 
+      #details{
+        display: flex;
+        flex-direction: column;
+        grid-area: details;
+        margin: auto 3vw;
+        font-size: 18px;
+
+        h1, h2{
+          font-weight: bold;
+          display: flex;
+          margin: 0;
+        }
+
+        h2{
+          font-weight: normal;
+          margin: 10% 0 0 0;
+        }
+      }
+
       #stats{
         grid-area: stats;
         display: grid;
@@ -67,11 +86,15 @@
         grid-template-columns: 50% 50%;
         grid-template-rows: 50% 50%;
 
+        h3{
+          margin: 0 0 0 10%;
+          display: flex;
+          align-content: center;
+          flex-wrap: wrap;
+        }
+
         #feelsLike{
           grid-area: feels;
-          display: flex;
-          justify-content: center;
-          margin: 0;
           font-size: 2rem;
            
           .degree{
@@ -81,11 +104,45 @@
 
         #asOf{
           grid-area: asof;
-          margin: 0;
+          font-weight: normal;
         }
 
         #etc{
           grid-area: etc;
+          display: grid;
+          grid-template: 
+            "uvi hum"
+            "sunr suns";
+          grid-template-columns: 50% 50%;
+          grid-template-rows: 50% 50%;
+
+          #uvi{
+            grid-area: uvi;
+          }
+
+          #hum{
+            grid-area: hum;
+          }
+
+          #sunr{
+            grid-area: sunr;
+          }
+
+          #suns{
+            grid-area: suns;
+          }
+
+          .etc{   // combine font selectors to shorthand
+            display: flex;
+            flex-direction: row;
+            font-size: clamp(15px, 3vh, 25px);
+
+            p{
+              margin: 0;
+              height: fit-content;
+              align-self: center;
+            }
+          }                    
         }
       }
       #details{
@@ -168,9 +225,9 @@
     }
   }
 
+  // Classes
   p.degree{
     font-size: 40% !important;
     margin: 20% 0 0 0;
   }
-
 }
