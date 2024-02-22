@@ -4,7 +4,8 @@ import './App.scss';
 import $ from 'jquery';
 import * as icons from './icons/icons.js';
 import { GeoapifyGeocoderAutocomplete, GeoapifyContext } from '@geoapify/react-geocoder-autocomplete'
-import '@geoapify/geocoder-autocomplete/styles/minimal.css'
+import '@geoapify/geocoder-autocomplete/styles/minimal.css';
+import { Line } from 'react-chartjs-2';
 
 const autocompleteKey = '62e93b34c2ee4337b92e9b81d777029a';
 const openWeatherKey = 'ad46bca0cb15937504da590a8559bbae';
@@ -35,6 +36,8 @@ const WeatherApp2 = () => {
     if(!$.isEmptyObject(wData)){
       $('#default').css('display', 'none');
       // $('#daily').css('display', 'flex');  
+
+      console.log(wData);
     }
   }, [wData]);
 
@@ -54,7 +57,7 @@ const WeatherApp2 = () => {
     fetch(`http://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&units=metric&exclude=alerts&appid=${openWeatherKey}`)
     .then(response => response.json())
     .then(data => {
-      console.log(data.current);
+      // console.log(data);
 
       setwData({    // gather weather data into state
         main: data.current.weather[0].main,
@@ -72,7 +75,7 @@ const WeatherApp2 = () => {
         windspeed: data.current.windspeed,
         zoneShift: data.timezone_offset,          
 
-        daily: data.daily,
+        daily: data.daily.slice(0.24),
         hourly: data.hourly.slice(0, 24)                   // limiting to 24 hours
       })
     })
@@ -174,7 +177,9 @@ const WeatherApp2 = () => {
             </div>
           </div>
           <div id='hourly'>
-            Chart will go here
+            {/* <Line
+              data={wData.hourly}
+            /> */}
           </div>
         </div>
         <div id='weekly'>

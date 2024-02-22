@@ -35,7 +35,7 @@
         "hourly hourly";
       grid-template-columns: 50% 50%;
       grid-template-rows: 45% 15% 40%;
-            width: clamp(760px,50vw,1200px);
+      width: clamp(760px,50vw,1200px);
       border: 1px solid rgba(0,0,0,.125);             // shorten to shorthand ?
 
       // div{
