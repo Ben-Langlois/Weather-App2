@@ -34,10 +34,38 @@ const WeatherApp2 = () => {
 
   useEffect(() => {     // Weather Data updates
     if(!$.isEmptyObject(wData)){
-      $('#default').css('display', 'none');
+      $('#default').css('display', 'none');       // display dash/hide default
       // $('#daily').css('display', 'flex');  
 
-      console.log(wData);
+
+      // format wData hourly for chart
+      // Labels
+      // - contains the next 24 hours from og dt
+      // - hours from each dt of e in wData.hourly
+      // - should just be 3pm, 4pm, 5pm, 6pm etc
+      let labels = wData.hourly.map((e) => {
+        getTime(e, 'time');
+      });
+
+      // Dataset
+      // - temp for each e in wData.hourly
+      // let dataset = [
+      //   {
+
+      //   }
+      // ]
+
+      // const data = {
+      //   labels: labels,
+      //   datasets: dataset
+      // }
+       
+      // $('#hourly').append(<Line
+      //   data={
+      //  labels: wData.dt}
+      // />)
+
+      console.log(labels);
     }
   }, [wData]);
 
