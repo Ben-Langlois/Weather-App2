@@ -43,34 +43,33 @@ const WeatherApp2 = () => {
       // - contains the next 24 hours from og dt
       // - hours from each dt of e in wData.hourly
       // - should just be 3pm, 4pm, 5pm, 6pm etc
-      let labels = wData.hourly.map((e) => {
-        getTime(e, 'time');
-      });
+      let times = [];
+      wData.hourly.map((e, i) => {
+        times[i] = getTime(e.dt, 'time')
+      })
 
-      // Dataset
+      // Data
       // - temp for each e in wData.hourly
-      // let dataset = [
-      //   {
+      let temps = []
+      wData.hourly.map((e, i) => {
+        temps[i] = e.temp;
+      })
 
-      //   }
-      // ]
-
-      // const data = {
-      //   labels: labels,
-      //   datasets: dataset
-      // }
+      const data = {
+        labels: times,
+        datasets: temps
+      }
        
-      // $('#hourly').append(<Line
-      //   data={
-      //  labels: wData.dt}
-      // />)
+      $('#hourly').append(<Line data={{labels: times, datasets:{data: temps}}}/>)
 
-      console.log(labels);
+      // console.log(wData.hourly);
+      // console.log(labels);
+      // console.log(data);
     }
   }, [wData]);
 
   const onPlaceSelect = (value) => {
-    console.log(value);
+    // console.log(value);
 
     // on location select (not 'x')
     if(value) {  // this ensures actual place is selected
