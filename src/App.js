@@ -6,6 +6,8 @@ import * as icons from './icons/icons.js';
 import { GeoapifyGeocoderAutocomplete, GeoapifyContext } from '@geoapify/react-geocoder-autocomplete'
 import '@geoapify/geocoder-autocomplete/styles/minimal.css';
 import { Line } from 'react-chartjs-2';
+import { Chart as ChartJS } from "chart.js";
+
 
 const autocompleteKey = '62e93b34c2ee4337b92e9b81d777029a';
 const openWeatherKey = 'ad46bca0cb15937504da590a8559bbae';
@@ -56,15 +58,35 @@ const WeatherApp2 = () => {
       })
 
       const data = {
-        labels: times,
-        datasets: temps
+        labels: [...times],
+        datasets: [{
+          label: 'temp',
+          data: [...temps]
+        }]
       }
-       
-      $('#hourly').append(<Line data={{labels: times, datasets:{data: temps}}}/>)
+
+      // example of object 
+      // data: {
+      //   labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      //   datasets: [{
+      //     label: '# of Votes',
+      //     data: [12, 19, 3, 5, 2, 3],
+      //     borderWidth: 1
+      //   }]
+      // }
+
+
+      // $('#hourly').append(<Line data={{
+      //   labels: [...times],
+      //   datasets: [{
+      //     label: 'temp',
+      //     data: [...temps]
+      //   }]
+      // }}/>)
 
       // console.log(wData.hourly);
-      // console.log(labels);
-      // console.log(data);
+      // console.log(times);
+      console.log(data);
     }
   }, [wData]);
 
