@@ -34,7 +34,7 @@
         "stats stats"
         "hourly hourly";
       grid-template-columns: 50% 50%;
-      grid-template-rows: 45% 15% 40%;
+      grid-template-rows: 35% 20% 45%;
       width: clamp(760px,50vw,1200px);
       border: 1px solid rgba(0,0,0,.125);             // shorten to shorthand ?
 
@@ -152,6 +152,10 @@
       #hourly{
         grid-area: hourly;
 
+        #chart{
+          width: 100%;
+          display: none !important;
+        }
       }
 
       #default{
