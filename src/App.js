@@ -7,6 +7,7 @@ import { GeoapifyGeocoderAutocomplete, GeoapifyContext } from '@geoapify/react-g
 import '@geoapify/geocoder-autocomplete/styles/minimal.css';
 import { Line, CategoryScale } from 'react-chartjs-2';
 import { Chart } from "chart.js/auto";
+import { getByDisplayValue } from '@testing-library/react';
 
 
 const autocompleteKey = '62e93b34c2ee4337b92e9b81d777029a';
@@ -213,6 +214,18 @@ const WeatherApp2 = () => {
             <Line
               id='chart'
               data={cData}
+              options={{
+                plugins: {
+                  legend: false             // Hide legend
+                },
+                scales: {
+                  y: [{
+                    ticks: {
+                      stepSize: 1,          
+                    }
+                  }]
+                }
+              }}
             />
           </div>
         </div>
