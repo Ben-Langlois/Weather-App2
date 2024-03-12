@@ -110,7 +110,7 @@ const WeatherApp2 = () => {
         zoneShift: data.timezone_offset,          
 
         daily: data.daily.slice(0.24),
-        hourly: data.hourly.slice(0, 12)                   // limiting to 12 hours
+        hourly: data.hourly.slice(0, 24)                   // limiting to 12 hours
       })
     })
     .catch(err => {
@@ -219,11 +219,16 @@ const WeatherApp2 = () => {
                   legend: false             // Hide legend
                 },
                 scales: {
-                  y: [{
+                  y: {
                     ticks: {
-                      stepSize: 1,          
+                      stepSize: 2,          
                     }
-                  }]
+                  },
+                  x: {
+                    ticks: {
+                        maxTicksLimit: 7
+                    }
+                  }
                 }
               }}
             />
