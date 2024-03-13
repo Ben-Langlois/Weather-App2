@@ -19,8 +19,9 @@ const WeatherApp2 = () => {
   const [location, setLocation] = useState('');
   const [long, setLong] = useState('');
   const [lat, setLat] = useState('');
-  const [wData, setwData] = useState({});
-  const [cData, setcData] = useState({    // empty for chart, so it doesnt get mad
+  const [wData, setwData] = useState({});   // General Weather Data
+  const [dData, setdData] = useState([]);   // Daily Data
+  const [cData, setcData] = useState({      // empty for chart, so it doesnt get mad
     labels: ['empty'],
     datasets: [{
       label: 'temp',
@@ -72,6 +73,10 @@ const WeatherApp2 = () => {
           data: [...temps]
         }]
       })
+
+      setdData([
+        ...wData.daily
+      ])
     }
   }, [wData]);
 
@@ -109,9 +114,11 @@ const WeatherApp2 = () => {
         windspeed: data.current.windspeed,
         zoneShift: data.timezone_offset,          
 
-        daily: data.daily.slice(0.24),
+        daily: data.daily,
         hourly: data.hourly.slice(0, 24)                   // limiting to 12 hours
       })
+
+      console.log(dData)
     })
     .catch(err => {
       console.error('Call Failed', err)
@@ -136,7 +143,7 @@ const WeatherApp2 = () => {
       } else {
         return (date.getMinutes() < 10 ? `${date.getHours()}:0${date.getMinutes()} am` : `${date.getHours()}:${date.getMinutes()} am`)
       }
-    } else if(rv == 'day'){  // if user requests the day 
+    } else if(rv === 'day'){  // if user requests the day 
       return weekdays.slice(date.getDay(), date.getDay() + 1) // returns day of the week corresponding to dt
     }
   }
@@ -235,7 +242,13 @@ const WeatherApp2 = () => {
           </div>
         </div>
         <div id='weekly'>
-          This is where weekly data will be displayed
+        {
+          dData.map(() => {
+            return(
+              <div>asd</div>
+            )
+          })
+        }
         </div>
       </div>
     </div>
