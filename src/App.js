@@ -248,7 +248,7 @@ const WeatherApp2 = () => {
             dData.map((e) => {
               return(
                 <div class='dayCard'>
-                  <img src={icons.clearDay} />
+                  <img src={icons.clearDay} />{/* Will implement getIcon or whatever its called soon */}
                   <p>{Math.round(e.temp.min)}<p class='degree'>&#8451;</p>&nbsp;-&nbsp;{Math.round(e.temp.max)}<p class='degree'>&#8451;</p></p>
                 </div>
               )
