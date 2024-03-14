@@ -12,8 +12,25 @@ import { getByDisplayValue } from '@testing-library/react';
 
 const autocompleteKey = '62e93b34c2ee4337b92e9b81d777029a';
 const openWeatherKey = 'ad46bca0cb15937504da590a8559bbae';
-var weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-
+const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const chartSettings = {
+  plugins: {
+    legend: false             // Hide legend
+  },
+  scales: {
+    y: {
+      ticks: {
+        stepSize: 2,  
+        maxTicksLimit: 6        
+      }
+    },
+    x: {
+      ticks: {
+        maxTicksLimit: 7
+      }
+    }
+  }
+}
 
 const WeatherApp2 = () => {
   const [location, setLocation] = useState('');
@@ -221,34 +238,22 @@ const WeatherApp2 = () => {
             <Line
               id='chart'
               data={cData}
-              options={{
-                plugins: {
-                  legend: false             // Hide legend
-                },
-                scales: {
-                  y: {
-                    ticks: {
-                      stepSize: 2,          
-                    }
-                  },
-                  x: {
-                    ticks: {
-                        maxTicksLimit: 7
-                    }
-                  }
-                }
-              }}
+              options={chartSettings}
             />
           </div>
         </div>
         <div id='weekly'>
-        {
-          dData.map(() => {
-            return(
-              <div>asd</div>
-            )
-          })
-        }
+          <h2>7-Day Forecast</h2>
+          {
+            dData.map((e) => {
+              return(
+                <div class='dayCard'>
+                  <img src={icons.clearDay} />
+                  <p>{Math.round(e.temp.min)}<p class='degree'>&#8451;</p>&nbsp;-&nbsp;{Math.round(e.temp.max)}<p class='degree'>&#8451;</p></p>
+                </div>
+              )
+            })
+          }
         </div>
       </div>
     </div>

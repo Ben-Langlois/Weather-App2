@@ -229,12 +229,27 @@
       height: 80%;
       border: 1px solid rgba(0,0,0,.125);             // shorten to shorthand ?
       border-radius: 0.5rem;
+    
+      .dayCard{
+        display: flex;
+        justify-content: space-around;
+
+        img{
+          height: 3rem;
+        }
+
+        p{
+          display: flex;
+          margin: 0;
+          align-items: center;
+        }
+      }
     }
+
   }
 
   // Classes
   p.degree{
     font-size: 40% !important;
-    margin: 20% 0 0 0;
   }
 }
