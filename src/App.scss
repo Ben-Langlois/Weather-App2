@@ -31,7 +31,7 @@
     justify-content: center;
     gap: 2vw;
 
-    #daily{
+    #today{
       display: grid;
       grid-template-areas: 
         "main details"
@@ -232,10 +232,12 @@
     
       .dayCard{
         display: flex;
-        justify-content: space-around;
+        // justify-content: space-around;
+        margin: 0 5%;
 
         img{
           height: 3rem;
+          margin: 0 15%;
         }
 
         p{
@@ -243,9 +245,12 @@
           margin: 0;
           align-items: center;
         }
+
+        #temp{
+          margin-left: auto;
+        }
       }
     }
-
   }
 
   // Classes

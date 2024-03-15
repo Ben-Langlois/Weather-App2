@@ -182,7 +182,7 @@ const WeatherApp2 = () => {
           </GeoapifyContext>          
       </header>
       <div id='dashboard'>
-        <div id='daily'>
+        <div id='today'>
           <div id='default'>
             <div id='icon'>
               <img src={icons.clearDay} alt=''/>
@@ -248,8 +248,9 @@ const WeatherApp2 = () => {
             dData.map((e) => {
               return(
                 <div class='dayCard'>
+                  <p id='day'>Mon</p>{/* Must make this dynamic */}
                   <img src={icons.clearDay} />{/* Will implement getIcon or whatever its called soon */}
-                  <p>{Math.round(e.temp.min)}<p class='degree'>&#8451;</p>&nbsp;-&nbsp;{Math.round(e.temp.max)}<p class='degree'>&#8451;</p></p>
+                  <p id='temp'>{Math.round(e.temp.min)}<p class='degree'>&#8451;</p>&nbsp;-&nbsp;{Math.round(e.temp.max)}<p class='degree'>&#8451;</p></p>
                 </div>
               )
             })
