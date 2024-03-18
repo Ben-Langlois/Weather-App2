@@ -20,13 +20,13 @@ const chartSettings = {
   scales: {
     y: {
       ticks: {
-        stepSize: 2,  
-        maxTicksLimit: 6        
+        stepSize: 1,  
+        maxTicksLimit: 6
       }
     },
     x: {
       ticks: {
-        maxTicksLimit: 7
+        maxTicksLimit: 8
       }
     }
   }
@@ -62,8 +62,12 @@ const WeatherApp2 = () => {
 
   useEffect(() => {     // Weather Data updates
     if(!$.isEmptyObject(wData)){
+      // Determining proper SVG
+      let mySVG = weatherCheck(wData.id, wData.dt);
+
       $('#default').css('display', 'none');       // display dash/hide default
       $('#chart').attr('style', 'display: block !important');  
+      $('#App #dashboard #today #main img').prop('src', mySVG);    // change src to returned svg
 
 
       // format wData hourly for chart
@@ -165,6 +169,64 @@ const WeatherApp2 = () => {
     }
   }
 
+  /*  isDay
+      params
+        {dt}: unix time thingy
+      returns
+        {bool}: day = true, night = false
+  */
+  const isDay = (dt) => {
+    let time = dt * 1000,       
+    date = new Date(time);    // getting date object
+
+    if (date.getHours >= 7 && date.getHours <= 19){ // if between 7am and 7pm
+      return true;    // true == day
+    }
+    return false;     // false == night
+  }
+
+  /*  weatherCheck(number)
+      param 
+        {number}: props.main, >=1 digit number
+      returns  
+        {svg}: icons.xxxxx
+      
+      determines svg to return based on inputted number
+  */ 
+  const weatherCheck = (daily, dt) => {   
+    // use regex to determine what number daily starts with
+    if(/^2/.test(daily.toString())){              // Thunderstorms  
+      if(daily === 201){
+        return icons.rainThunderstorm;
+      } else {
+        return icons.thunderstormsDefault;
+      }
+    } else if (/^3/.test(daily.toString())){      // Drizzle
+      return icons.drizzle;
+    } else if (/^5/.test(daily.toString())){      // Rain
+      if(daily === 502){
+        return icons.heavyRain;
+      } else {
+        return icons.rainDefault;
+      }
+    } else if (/^6/.test(daily.toString())){      // Snow
+      return icons.snowDefault;
+    } else if (/^7/.test(daily.toString())){      // Fog
+      if(isDay(dt)){
+        return icons.fogDay;
+      }
+      return icons.fogNight;
+    } else if (daily === 800){                    // Clear
+      if(isDay(dt)){
+        return icons.clearDay;
+      }
+      return icons.clearNight;
+    } else if (/^8/.test(daily.toString())){      // Cloudy
+      return icons.cloudyDefault;
+    }
+  }
+
+
   return (
     <div id="App">
       <header id="search-bar">
@@ -205,7 +267,7 @@ const WeatherApp2 = () => {
           </div>
 
           <div id='main'>
-            <img src={icons.clearDay} alt=''/>
+            <img src='...' alt=''/>
             <h1 id='temp'>{wData.temp}<p class='degree'>&#8451;</p></h1>
           </div>
           <div id='details'>
@@ -245,11 +307,11 @@ const WeatherApp2 = () => {
         <div id='weekly'>
           <h2>7-Day Forecast</h2>
           {
-            dData.map((e) => {
+            dData.map((e, i) => {
               return(
                 <div class='dayCard'>
-                  <p id='day'>Mon</p>{/* Must make this dynamic */}
-                  <img src={icons.clearDay} />{/* Will implement getIcon or whatever its called soon */}
+                  <p id='day'>{i == 0 ? 'Today' : getTime(e.dt, 'day')}</p>
+                  <img src={weatherCheck(wData.id, e.dt)} />{/* Will implement getIcon or whatever its called soon */}
                   <p id='temp'>{Math.round(e.temp.min)}<p class='degree'>&#8451;</p>&nbsp;-&nbsp;{Math.round(e.temp.max)}<p class='degree'>&#8451;</p></p>
                 </div>
               )
