@@ -7,47 +7,45 @@
 */
 // (id)
 // 2xx Thunderstorm
-import thunderstormsDefault from './Dynamic/thunderstorms.svg';                     // 211 default
-import rainThunderstorm from './Dynamic/thunderstorms-overcast-rain.svg';           // 201 Thunderstorm with rain
-import overcastThunderstorm from './Dynamic/thunderstorms-overcast.svg';            // 221 Ragged thunderstorm
+import thunderstormsDefault from './Monochrome/wi_thunderstorms.svg';                     // 211 default
+import rainThunderstorm from './Monochrome/wi_thunderstorms-overcast-rain.svg';           // 201 Thunderstorm with rain
+import overcastThunderstorm from './Monochrome/wi_thunderstorms-overcast.svg';            // 221 Ragged thunderstorm
 
 // 3xx Drizzle
-import drizzle from './Dynamic/drizzle.svg';                    // 300 Default
+import drizzle from './Monochrome/wi_drizzle.svg';                    // 300 Default
 
 // 5xx Rain 
-import rainDefault from './Dynamic/rain.svg';           // 500 Default
-import heavyRain from './Dynamic/extreme-rain.svg';     // 502 Heavy Rain
+import rainDefault from './Monochrome/wi_rain.svg';           // 500 Default
+import heavyRain from './Monochrome/wi_extreme-rain.svg';     // 502 Heavy Rain
 
 // 6xx Snow
-import snowDefault from './Dynamic/snow.svg';           // 601 Default
+import snowDefault from './Monochrome/wi_snow.svg';           // 601 Default
 // 600 Light Snow
 // 602 Heavy Snow
 // 616 Rain and Snow
 
 // 7xx Atmosphere 
-import fogDay from './Dynamic/fog-day.svg';             // 701 Fog Day
-import fogNight from './Dynamic/fog-night.svg';         // 701 Fog Night
-
+import fogDay from './Monochrome/wi_fog-day.svg';             // 701 Fog Day
+import fogNight from './Monochrome/wi_fog-night.svg';         // 701 Fog Night
 
 // 800 Clear
-import clearDay from './Dynamic/clear-day.svg';             // Day    
-import clearNight from './Dynamic/clear-night.svg';         // Night
-
+import clearDay from './Monochrome/wi_clear-day.svg';             // Day    
+import clearNight from './Monochrome/wi_clear-night.svg';         // Night
 
 // 80x Clouds
-import cloudyDefault from './Dynamic/cloudy.svg';                  // 803 Clouds Default
+import cloudyDefault from './Monochrome/wi_cloudy.svg';                  // 803 Clouds Default
 // 801 Few Clouds
 // 802 Scattered Clouds
 // 804 Overcast
 
 // For stats section
-import UVI from './stats/uv-index.svg';
-import humidity from './stats/humidity.svg';
-import sunrise from './stats/sunrise.svg';
-import sunset from './stats/sunset.svg';
-import clouds from './stats/cloudy.svg';
-import high from './stats/thermometer-warmer.svg';
-import low from './stats/thermometer-colder.svg';
+import UVI from './stats/wi_uv-index.svg';
+import humidity from './stats/wi_humidity.svg';
+import sunrise from './stats/wi_sunrise.svg';
+import sunset from './stats/wi_sunset.svg';
+import clouds from './stats/wi_cloudy.svg';
+import high from './stats/wi_thermometer-warmer.svg';
+import low from './stats/wi_thermometer-colder.svg';
 // Static icons
 
 // Social Icons

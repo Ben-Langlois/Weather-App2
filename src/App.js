@@ -121,7 +121,7 @@ const WeatherApp2 = () => {
 
       setwData({    // gather weather data into state
         main: data.current.weather[0].main,
-        desc: data.current.weather[0].desc,
+        desc: data.current.weather[0].desc,                // Do i need this?
         id: data.current.weather[0].id,
         dt: data.current.dt,
         clouds: data.current.clouds,
@@ -132,14 +132,14 @@ const WeatherApp2 = () => {
         sunset: data.current.sunset,
         temp: Math.round(data.current.temp),
         uvi: data.current.uvi,
-        windspeed: data.current.windspeed,
-        zoneShift: data.timezone_offset,          
+        windspeed: data.current.windspeed,                 // Do i need this?
+        zoneShift: data.timezone_offset,                   // Do i need this?
 
         daily: data.daily,
-        hourly: data.hourly.slice(0, 24)                   // limiting to 12 hours
+        hourly: data.hourly.slice(0, 24)                   // limiting to 24 hours
       })
 
-      console.log(dData)
+      console.log(data)
     })
     .catch(err => {
       console.error('Call Failed', err)
@@ -226,7 +226,6 @@ const WeatherApp2 = () => {
     }
   }
 
-
   return (
     <div id="App">
       <header id="search-bar">
@@ -312,7 +311,7 @@ const WeatherApp2 = () => {
                 <div class='dayCard'>
                   <p id='day'>{i == 0 ? 'Today' : getTime(e.dt, 'day')}</p>
                   <img src={weatherCheck(wData.id, e.dt)} />{/* Will implement getIcon or whatever its called soon */}
-                  <p id='temp'>{Math.round(e.temp.min)}<p class='degree'>&#8451;</p>&nbsp;-&nbsp;{Math.round(e.temp.max)}<p class='degree'>&#8451;</p></p>
+                  <p id='temp'>H:{Math.round(e.temp.min)}<p class='degree'>&#8451;</p>&nbsp;L:{Math.round(e.temp.max)}<p class='degree'>&#8451;</p></p>
                 </div>
               )
             })
