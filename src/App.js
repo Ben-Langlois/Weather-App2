@@ -196,31 +196,17 @@ const WeatherApp2 = () => {
   const weatherCheck = (daily, dt) => {   
     // use regex to determine what number daily starts with
     if(/^2/.test(daily.toString())){              // Thunderstorms  
-      if(daily === 201){
-        return icons.rainThunderstorm;
-      } else {
-        return icons.thunderstormsDefault;
-      }
+      return daily === 201 ? icons.rainThunderstorm : icons.thunderstormsDefault;
     } else if (/^3/.test(daily.toString())){      // Drizzle
       return icons.drizzle;
     } else if (/^5/.test(daily.toString())){      // Rain
-      if(daily === 502){
-        return icons.heavyRain;
-      } else {
-        return icons.rainDefault;
-      }
+      return daily === 502 ? icons.heavyRain : icons.rainDefault;
     } else if (/^6/.test(daily.toString())){      // Snow
       return icons.snowDefault;
     } else if (/^7/.test(daily.toString())){      // Fog
-      if(isDay(dt)){
-        return icons.fogDay;
-      }
-      return icons.fogNight;
+      return isDay(dt) ? icons.fogDay : icons.fogNight;
     } else if (daily === 800){                    // Clear
-      if(isDay(dt)){
-        return icons.clearDay;
-      }
-      return icons.clearNight;
+      return isDay(dt) ? icons.clearDay : icons.clearNight;
     } else if (/^8/.test(daily.toString())){      // Cloudy
       return icons.cloudyDefault;
     }
@@ -310,8 +296,8 @@ const WeatherApp2 = () => {
               return(
                 <div class='dayCard'>
                   <p id='day'>{i == 0 ? 'Today' : getTime(e.dt, 'day')}</p>
-                  <img src={weatherCheck(wData.id, e.dt)} />{/* Will implement getIcon or whatever its called soon */}
-                  <p id='temp'>H:{Math.round(e.temp.min)}<p class='degree'>&#8451;</p>&nbsp;L:{Math.round(e.temp.max)}<p class='degree'>&#8451;</p></p>
+                  <img src={weatherCheck(e.weather[0].id, e.dt)} />{/* Will implement getIcon or whatever its called soon */}
+                  <p id='temp'>H: {Math.round(e.temp.min)}<p class='degree'>&#8451;</p>&nbsp;L: {Math.round(e.temp.max)}<p class='degree'>&#8451;</p></p>
                 </div>
               )
             })

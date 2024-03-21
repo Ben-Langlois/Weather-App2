@@ -229,26 +229,36 @@
       height: 80%;
       border: 1px solid rgba(0,0,0,.125);             // shorten to shorthand ?
       border-radius: 0.5rem;
-    
+      display: flex;
+      flex-direction: column;
+
       .dayCard{
         display: flex;
-        // justify-content: space-around;
+        justify-content: space-around;
         margin: 0 5%;
+        flex: 1;
+
+        img, p{
+          flex: 1;
+          display: flex;
+        }
 
         img{
-          height: 3rem;
-          // margin: 0 15% 0 auto;
-          justify-self: center;
+          height: 3.5rem;
+          align-self: center;
         }
 
         p{
-          display: flex;
-          margin: 0;
           align-items: center;
+          font-size: 1.3rem;
         }
 
         #temp{
-          margin-left: auto;
+          justify-content: end;
+          
+          .degree{
+            font-size: 0.8rem !important;
+          }
         }
       }:nth-child(2) {    // 'today' is bolded
         #day{
