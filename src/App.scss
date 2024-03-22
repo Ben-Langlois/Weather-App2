@@ -225,7 +225,7 @@
     }
 
     #weekly{
-      width: 20vw;
+      width: clamp(350px, 20vw, 550px);
       height: 80%;
       border: 1px solid rgba(0,0,0,.125);             // shorten to shorthand ?
       border-radius: 0.5rem;
@@ -234,28 +234,30 @@
 
       .dayCard{
         display: flex;
-        justify-content: space-around;
+        justify-content: flex-start;
         margin: 0 5%;
         flex: 1;
 
         img, p{
-          flex: 1;
+          flex: 1 1;
           display: flex;
         }
 
         img{
           height: 3.5rem;
           align-self: center;
+          // justify-self: start;
         }
 
         p{
           align-items: center;
-          font-size: 1.3rem;
+          // font-size: 1.3rem;
         }
 
         #temp{
           justify-content: end;
-          
+          // flex-grow: 2;
+
           .degree{
             font-size: 0.8rem !important;
           }
