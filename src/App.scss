@@ -32,7 +32,7 @@
     gap: 2vw;
 
     #today{
-      display: grid;
+      display: none;
       grid-template-areas: 
         "main details"
         "stats stats"
@@ -59,7 +59,6 @@
           margin: auto 0;
         }               
       }
-
       #details{
         display: flex;
         flex-direction: column;
@@ -78,7 +77,6 @@
           margin: 10% 0 0 0;
         }
       }
-
       #stats{
         grid-area: stats;
         display: grid;
@@ -157,68 +155,73 @@
           margin: 0 auto;
         }
       }
+    }
 
-      #default{
-        display: none;
-        z-index: 1;
-        grid-area: daily;
-        width: 100%;
-        margin: 0 auto 0;
-        grid-template-columns: 50% 50%;
-        grid-template-areas: 
-          "icon title"
-          "desc desc";
+    #default{
+      display: grid;
+      z-index: 1;
+      grid-area: daily;
+      margin: 0 auto 0;
+      grid-template-columns: 50% 50%;
+      grid-template-areas: 
+        "icon title"
+        "desc desc";
+      height: 80%;
+      width: clamp(760px, 40vw, 1200px);
+      border: 1px solid rgba(0,0,0,.125);             // shorten to shorthand ?
+      border-radius: 0.5rem;
 
-        #icon{
-          grid-area: icon;
 
-          img{
-            width: 80%;
-            display: flex;
-            margin: 0 auto;
-          }
-        }
+      #icon{
+        grid-area: icon;
 
-        #title{
-          grid-area: title;
+        img{
+          width: 80%;
           display: flex;
-          align-items: center;
+          margin: 0 auto;
+        }
+      }
 
-          h1{
-            display: inline-block;
-            margin: 0;
-            font-weight: bold;          // shorthand dis
-            font-size: 3.5rem;
+      #title{
+        grid-area: title;
+        display: flex;
+        align-items: center;
+
+        h1{
+          display: inline-block;
+          margin: 0;
+          font-weight: bold;          // shorthand dis
+          font-size: 3.5rem;
+        }
+      }
+      
+      #desc{
+        grid-area: desc;
+        padding: 0 5%;
+        
+        p{
+          font-size: 1.5rem;
+          text-align: justify;
+        }
+
+        a{
+          color: #000000;
+
+          &:hover{
+            font-weight: bold;
           }
         }
-        
-        #desc{
-          grid-area: desc;
-          padding: 0 5%;
-          
-          p{
-            font-size: 1.5rem;
-          }
 
-          a{
-            color: #000000;
+        #socials{
+          display: flex;
+          justify-content: center;
+          gap: 1vw;
+          margin-bottom: 1rem;                
 
-            &:hover{
-              font-weight: bold;
-            }
-          }
-
-          #socials{
-            display: flex;
-            justify-content: center;
-            gap: 1vw;
-            margin-bottom: 1rem;                
-
-            a{  
-              img{
-                width: 3rem;
-              }       
-            }
+          a{  
+            img{
+              width: 3rem;
+            }       
           }
         }
       }
@@ -229,7 +232,7 @@
       height: 80%;
       border: 1px solid rgba(0,0,0,.125);             // shorten to shorthand ?
       border-radius: 0.5rem;
-      display: flex;
+      display: none;
       flex-direction: column;
 
       .dayCard{

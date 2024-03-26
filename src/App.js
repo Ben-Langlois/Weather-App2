@@ -65,9 +65,11 @@ const WeatherApp2 = () => {
       // Determining proper SVG
       let mySVG = weatherCheck(wData.id, wData.dt);
 
-      $('#default').css('display', 'none');       // display dash/hide default
-      $('#chart').attr('style', 'display: block !important');  
-      $('#App #dashboard #today #main img').prop('src', mySVG);    // change src to returned svg
+      $('#default').css('display', 'none');                         // hide default
+      $('#weekly').css('display', 'flex');                          // display dash
+      $('#today').css('display', 'grid');                           // display today
+      $('#chart').attr('style', 'display: block !important');       // display weather icon on today
+      $('#App #dashboard #today #main img').prop('src', mySVG);     // change src to returned svg
 
 
       // format wData hourly for chart
@@ -229,28 +231,27 @@ const WeatherApp2 = () => {
           </GeoapifyContext>          
       </header>
       <div id='dashboard'>
-        <div id='today'>
-          <div id='default'>
-            <div id='icon'>
-              <img src={icons.clearDay} alt=''/>
-            </div>
-            <div id='title'>
-              <h1>Weather<br/>App II</h1>
-            </div>
-            <div id='desc'>
-              <p>
-                A Weather Dashboard application, created by <a href='https://ben-langlois.github.io/Portfolio/'>Ben Langlois</a>, aimed to display weather statistics for inputted city. The application is
-                built in React and SASS, it utilizes multiple APIs such as: <a href='https://www.geoapify.com/address-autocomplete'>GeoApify</a>, and <a href='https://openweathermap.org/api/one-call-3'>OpenWeatherMap API</a>.<br/><br/>
-                The application allows users to search for the weather in a specific city and displays the current weather conditions along with hourly and weekly 
-                forecasts. Cards display temperatures and various stats such as: humidity, precipitation, sunrise/set etc.
-              </p>
-              <div id='socials'>
-                <a href='https://github.com/Ben-Langlois/Weather-App2'><img src={icons.github}/></a>
-                <a href='https://www.linkedin.com/in/benjaminlanglois/'><img src={icons.linkedin}/></a>
-              </div>
+        <div id='default'>
+          <div id='icon'>
+            <img src={icons.clearDay} alt=''/>
+          </div>
+          <div id='title'>
+            <h1>Weather<br/>App II</h1>
+          </div>
+          <div id='desc'>
+            <p>
+              A Weather Dashboard application, created by <a href='https://ben-langlois.github.io/Portfolio/'>Ben Langlois</a>, aimed to display weather statistics for inputted city. The application is
+              built in React and SASS, it utilizes multiple APIs such as: <a href='https://www.geoapify.com/address-autocomplete'>GeoApify</a>, and <a href='https://openweathermap.org/api/one-call-3'>OpenWeatherMap API</a>.<br/><br/>
+              The application allows users to search for the weather in a specific city and displays the current weather conditions along with hourly and weekly 
+              forecasts. Cards display temperatures and various stats such as: humidity, precipitation, sunrise/set etc.
+            </p>
+            <div id='socials'>
+              <a href='https://github.com/Ben-Langlois/Weather-App2'><img src={icons.github}/></a>
+              <a href='https://www.linkedin.com/in/benjaminlanglois/'><img src={icons.linkedin}/></a>
             </div>
           </div>
-
+        </div>      
+        <div id='today'>
           <div id='main'>
             <img src='...' alt=''/>
             <h1 id='temp'>{wData.temp}<p class='degree'>&#8451;</p></h1>
