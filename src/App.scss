@@ -12,7 +12,7 @@
 
     .geocoder-container{
       margin: 2.5vh;
-      width: 50vw !important;
+      width: 50vw;
 
       input{
         font-size: 1.5rem;
@@ -149,7 +149,7 @@
         grid-area: hourly;
 
         #chart{
-          // width: 100% !important;
+          width: 90% !important;
           height: 100% !important;
           // display: none !important;
           margin: 0 auto;
@@ -235,6 +235,10 @@
       display: none;
       flex-direction: column;
 
+      h2{
+        margin-bottom: 0;
+      }
+
       .dayCard{
         display: flex;
         justify-content: flex-start;
@@ -276,5 +280,29 @@
   // Classes
   p.degree{
     font-size: 40% !important;
+  }
+}
+
+@media (max-width: 960px) {
+  #App{
+
+    header{
+      .geocoder-container{
+        width: 90% !important;
+      }
+    }    
+
+    #dashboard{
+      flex-direction: column;
+      justify-content: start;
+
+      .main{
+        margin: 0 auto;
+      }
+
+      #today{
+        height: 40%;
+      }
+    }
   }
 }

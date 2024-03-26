@@ -231,7 +231,7 @@ const WeatherApp2 = () => {
           </GeoapifyContext>          
       </header>
       <div id='dashboard'>
-        <div id='default'>
+        <div id='default' class='main'>
           <div id='icon'>
             <img src={icons.clearDay} alt=''/>
           </div>
@@ -251,7 +251,7 @@ const WeatherApp2 = () => {
             </div>
           </div>
         </div>      
-        <div id='today'>
+        <div id='today' class='main'>
           <div id='main'>
             <img src='...' alt=''/>
             <h1 id='temp'>{wData.temp}<p class='degree'>&#8451;</p></h1>
@@ -291,14 +291,14 @@ const WeatherApp2 = () => {
           </div>
         </div>
         <div id='weekly'>
-          <h2>7-Day Forecast</h2>
+          <h2>8-Day Forecast</h2>
           {
             dData.map((e, i) => {
               return(
                 <div class='dayCard'>
                   <p id='day'>{i == 0 ? 'Today' : getTime(e.dt, 'day')}</p>
                   <img src={weatherCheck(e.weather[0].id, e.dt)} />{/* Will implement getIcon or whatever its called soon */}
-                  <p id='temp'>H: {Math.round(e.temp.min)}<p class='degree'>&#8451;</p>&nbsp;L: {Math.round(e.temp.max)}<p class='degree'>&#8451;</p></p>
+                  <p id='temp'>L: {Math.round(e.temp.min)}<p class='degree'>&#8451;</p>&nbsp;H: {Math.round(e.temp.max)}<p class='degree'>&#8451;</p></p>
                 </div>
               )
             })
