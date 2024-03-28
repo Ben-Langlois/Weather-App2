@@ -23,23 +23,24 @@
 
   #dashboard{
     flex: 1 1 auto;
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    // flex-direction: row;
     // grid-template-columns: 2.3fr 1fr;
-    // grid-template-areas: 
-    //   "daily weekly";
+    grid-template-areas: 
+      "daily weekly"
+      "hourly weekly";
+    grid-template-rows: auto 0;
     justify-content: center;
-    gap: 2vw;
+    gap: 1vw;
 
     #today{
       display: none;
       grid-template-areas: 
         "main details"
-        "stats stats"
-        "hourly hourly";
+        "stats stats";
       grid-template-columns: 50% 50%;
-      grid-template-rows: 35% 20% 45%;
-      height: 80%;
+      grid-template-rows: 60% 40%;
+      // height: 50%;
       width: clamp(760px, 40vw, 1200px);
       border: 1px solid rgba(0,0,0,.125);             // shorten to shorthand ?
       border-radius: 0.5rem;
@@ -63,11 +64,12 @@
         display: flex;
         flex-direction: column;
         grid-area: details;
-        margin: auto 3vw;
+        margin: auto;
         font-size: 18px;
 
         h1, h2{
           font-weight: bold;
+          text-align: start;
           display: flex;
           margin: 0;
         }
@@ -145,16 +147,16 @@
           }                    
         }
       }
-      #hourly{
-        grid-area: hourly;
+      // #hourly{
+      //   grid-area: hourly;
 
-        #chart{
-          width: 90% !important;
-          height: 100% !important;
-          // display: none !important;
-          margin: 0 auto;
-        }
-      }
+      //   #chart{
+      //     width: 90% !important;
+      //     height: 100% !important;
+      //     // display: none !important;
+      //     margin: 0 auto;
+      //   }
+      // }
     }
 
     #default{
@@ -226,14 +228,28 @@
         }
       }
     }
+    #hourly{
+      grid-area: hourly;
+      display: none;
+      border: 1px solid rgba(0,0,0,.125);             // shorten to shorthand ?
+      border-radius: 0.5rem;
+      width: clamp(760px, 40vw, 1200px) !important;
 
+      #chart{
+        width: 90% !important;
+        height: 100% !important;
+        // display: none !important;
+        margin: 0 auto;
+      }
+    }
     #weekly{
       width: clamp(350px, 20vw, 550px);
-      height: 80%;
+      // height: 80%;
       border: 1px solid rgba(0,0,0,.125);             // shorten to shorthand ?
       border-radius: 0.5rem;
       display: none;
       flex-direction: column;
+      grid-area: weekly;
 
       h2{
         margin-bottom: 0;
@@ -293,7 +309,7 @@
     }    
 
     #dashboard{
-      flex-direction: column;
+      // flex-direction: column;
       justify-content: start;
 
       .main{

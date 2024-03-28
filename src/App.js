@@ -29,7 +29,8 @@ const chartSettings = {
         maxTicksLimit: 8
       }
     }
-  }
+  },
+    responsive: false
 }
 
 const WeatherApp2 = () => {
@@ -65,9 +66,11 @@ const WeatherApp2 = () => {
       // Determining proper SVG
       let mySVG = weatherCheck(wData.id, wData.dt);
 
+      $('#dashboard').css("grid-template-rows", "45% 30%")
       $('#default').css('display', 'none');                         // hide default
       $('#weekly').css('display', 'flex');                          // display dash
       $('#today').css('display', 'grid');                           // display today
+      $('#hourly').css('display', 'block')
       $('#chart').attr('style', 'display: block !important');       // display weather icon on today
       $('#App #dashboard #today #main img').prop('src', mySVG);     // change src to returned svg
 
@@ -282,14 +285,15 @@ const WeatherApp2 = () => {
               </div>   
             </div>
           </div>
-          <div id='hourly'>
-            <Line
-              id='chart'
-              data={cData}
-              options={chartSettings}
-            />
-          </div>
+
         </div>
+        <div id='hourly'>
+          <Line
+            id='chart'
+            data={cData}
+            options={chartSettings}
+          />
+        </div>        
         <div id='weekly'>
           <h2>8-Day Forecast</h2>
           {
