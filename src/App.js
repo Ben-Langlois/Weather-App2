@@ -20,8 +20,9 @@ const chartSettings = {
   scales: {
     y: {
       ticks: {
-        stepSize: 1,  
-        maxTicksLimit: 6
+        stepSize: 1
+        // maxTicksLimit: 6
+        // autoSkip: false
       }
     },
     x: {
@@ -29,8 +30,7 @@ const chartSettings = {
         maxTicksLimit: 8
       }
     }
-  },
-    responsive: false
+  }
 }
 
 const WeatherApp2 = () => {

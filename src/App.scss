@@ -310,14 +310,49 @@
 
     #dashboard{
       // flex-direction: column;
-      justify-content: start;
+      justify-content: center;
+      grid-template-areas: 
+        "daily"
+        "hourly";
+      grid-template-columns: 90%;
 
       .main{
         margin: 0 auto;
+        width: 100% !important;
       }
 
       #today{
-        height: 40%;
+        // height: 40%;
+        // width: 100%;
+      }
+
+      #hourly{
+        width: auto !important;
+      }
+
+      #weekly{
+        display: none !important;
+        // width: auto;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px){
+  #App{
+
+    header{
+
+    }
+
+    #dashboard{
+      grid-template-areas: 
+        "daily"
+        "hourly"
+        "weekly";
+
+      #weekly{
+        // display: flex !important;
       }
     }
   }
