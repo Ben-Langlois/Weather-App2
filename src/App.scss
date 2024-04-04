@@ -41,7 +41,7 @@
       grid-template-columns: 50% 50%;
       grid-template-rows: 60% 40%;
       // height: 50%;
-      width: clamp(760px, 40vw, 1200px);
+      width: clamp(700px, 40vw, 1200px);
       border: 1px solid rgba(0,0,0,.125);             // shorten to shorthand ?
       border-radius: 0.5rem;
 
@@ -151,7 +151,6 @@
         }
       }
     }
-
     #default{
       display: grid;
       z-index: 1;
@@ -226,7 +225,7 @@
       display: none;
       border: 1px solid rgba(0,0,0,.125);             // shorten to shorthand ?
       border-radius: 0.5rem;
-      width: clamp(760px, 40vw, 1200px) !important;
+      width: clamp(700px, 40vw, 1200px) !important;
 
       #chart{
         width: 90% !important;
@@ -236,7 +235,7 @@
       }
     }
     #weekly{
-      width: clamp(350px, 20vw, 550px);
+      width: clamp(300px, 20vw, 550px);
       // height: 80%;
       border: 1px solid rgba(0,0,0,.125);             // shorten to shorthand ?
       border-radius: 0.5rem;
@@ -271,7 +270,7 @@
         }
 
         #temp{
-          justify-content: end;
+          justify-content: start;
           // flex-grow: 2;
 
           .degree{
@@ -305,9 +304,10 @@
       // flex-direction: column;
       justify-content: center;
       grid-template-areas: 
-        "daily"
-        "hourly";
-      grid-template-columns: 90%;
+        "daily weekly"
+        "hourly hourly";
+      grid-template-columns: 45% 45% !important;
+      grid-template-rows: 40% 40% !important;
 
       .main{
         margin: 0 auto;
@@ -317,6 +317,19 @@
       #today{
         // height: 40%;
         // width: 100%;
+
+        #stats{
+          #etc{
+            .etc{
+              align-items: center;
+              font-size: 1rem;
+
+              img{
+                height: 55%;
+              }
+            }
+          }
+        }
       }
 
       #hourly{
@@ -324,8 +337,10 @@
       }
 
       #weekly{
-        display: none !important;
-        // width: auto;
+        display: none;
+        width: auto;
+
+        overflow-y: scroll;
       }
     }
   }
@@ -343,30 +358,26 @@
         "daily"
         "hourly"
         "weekly";
+      grid-template-rows: 30vh 30vh auto !important;
+      grid-template-columns: 90% !important;
 
-        #today{
-          #stats{
-            h3{
-              margin-left: 5%;
-            }
+      #today{
+        #stats{
+          h3{
+            margin-left: 5%;
+          }
 
-            #feelsLike{
-              font-size: 1.5rem;
-            }
-
-            #etc{
-
-              .etc{
-                align-items: center;
-                font-size: 1rem;
-
-                img{
-                  height: 55%;
-                }
-              }
-            }
+          #feelsLike{
+            font-size: 1.5rem;
           }
         }
+      }
+
+      #hourly{
+        #chart{
+          // margin: 0;
+        }
+      }
 
       #weekly{
         // display: flex !important;

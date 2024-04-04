@@ -68,12 +68,11 @@ const WeatherApp2 = () => {
 
       $('#dashboard').css("grid-template-rows", "45% 30%")
       $('#default').css('display', 'none');                         // hide default
-      $('#weekly').attr('style', 'display: flex');                          // display dash
+      $('#weekly').css('display', 'flex');                          // display dash
       $('#today').css('display', 'grid');                           // display today
       $('#hourly').css('display', 'block')
       $('#chart').attr('style', 'display: block !important');       // display weather icon on today
       $('#App #dashboard #today #main img').prop('src', mySVG);     // change src to returned svg
-
 
       // format wData hourly for chart
       // Labels
@@ -264,7 +263,7 @@ const WeatherApp2 = () => {
             <h2 id='location'>{location}</h2>
           </div>
           <div id='stats'>
-            <h3 id='feelsLike'>Feels like {wData.feelsLike}<p class='degree'>&#8451;</p></h3>
+            <h3 id='feelsLike'>Feels like {wData.feelsLike}</h3>
             <h3 id='asOf'>As of {getTime(wData.dt, 'time')}</h3>
             <div id='etc'>
               <div id='uvi' className='etc' title='Cloud Coverage'> {/* should eventually convert css to reflect actual value*/}
@@ -302,7 +301,7 @@ const WeatherApp2 = () => {
                 <div class='dayCard'>
                   <p id='day'>{i == 0 ? 'Today' : getTime(e.dt, 'day')}</p>
                   <img src={weatherCheck(e.weather[0].id, e.dt)} />{/* Will implement getIcon or whatever its called soon */}
-                  <p id='temp'>L: {Math.round(e.temp.min)}<p class='degree'>&#8451;</p>&nbsp;H: {Math.round(e.temp.max)}<p class='degree'>&#8451;</p></p>
+                  <p id='temp'>L: {Math.round(e.temp.min)}&nbsp;H: {Math.round(e.temp.max)}</p>
                 </div>
               )
             })
