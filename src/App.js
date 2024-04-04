@@ -68,7 +68,7 @@ const WeatherApp2 = () => {
 
       $('#dashboard').css("grid-template-rows", "45% 30%")
       $('#default').css('display', 'none');                         // hide default
-      $('#weekly').css('display', 'flex');                          // display dash
+      $('#weekly').attr('style', 'display: flex');                          // display dash
       $('#today').css('display', 'grid');                           // display today
       $('#hourly').css('display', 'block')
       $('#chart').attr('style', 'display: block !important');       // display weather icon on today
