@@ -4,7 +4,7 @@
   flex-flow: column;
   height: 100vh;
 
-  #search-bar {
+  #search-bar{
     display: flex;
     flex: 0 1 auto;
     align-items: center;
@@ -20,21 +20,19 @@
       }
     }
   }
-
   #dashboard{
     flex: 1 1 auto;
-    display: grid;
-    // flex-direction: row;
+    display: none;
     // grid-template-columns: 2.3fr 1fr;
     grid-template-areas: 
       "daily weekly"
       "hourly weekly";
-    grid-template-rows: auto 0;
+    grid-template-rows: 45% 30%;
     justify-content: center;
     gap: 1vw;
 
     #today{
-      display: none;
+      display: grid;
       grid-template-areas: 
         "main details"
         "stats stats";
@@ -151,78 +149,9 @@
         }
       }
     }
-    #default{
-      display: grid;
-      z-index: 1;
-      grid-area: daily;
-      margin: 0 auto 0;
-      grid-template-columns: 50% 50%;
-      grid-template-areas: 
-        "icon title"
-        "desc desc";
-      height: 80%;
-      width: clamp(760px, 40vw, 1200px);
-      border: 1px solid rgba(0,0,0,.125);             // shorten to shorthand ?
-      border-radius: 0.5rem;
-
-
-      #icon{
-        grid-area: icon;
-
-        img{
-          width: 80%;
-          display: flex;
-          margin: 0 auto;
-        }
-      }
-
-      #title{
-        grid-area: title;
-        display: flex;
-        align-items: center;
-
-        h1{
-          display: inline-block;
-          margin: 0;
-          font-weight: bold;          // shorthand dis
-          font-size: 3.5rem;
-        }
-      }
-      
-      #desc{
-        grid-area: desc;
-        padding: 0 5%;
-        
-        p{
-          font-size: 1.5rem;
-          text-align: justify;
-        }
-
-        a{
-          color: #000000;
-
-          &:hover{
-            font-weight: bold;
-          }
-        }
-
-        #socials{
-          display: flex;
-          justify-content: center;
-          gap: 1vw;
-          margin-bottom: 1rem;                
-
-          a{  
-            img{
-              width: 3rem;
-            }       
-          }
-        }
-      }
-    }
     #hourly{
       grid-area: hourly;
-      display: none;
+      display: block;
       border: 1px solid rgba(0,0,0,.125);             // shorten to shorthand ?
       border-radius: 0.5rem;
       width: clamp(700px, 40vw, 1200px) !important;
@@ -239,7 +168,7 @@
       // height: 80%;
       border: 1px solid rgba(0,0,0,.125);             // shorten to shorthand ?
       border-radius: 0.5rem;
-      display: none;
+      display: flex;
       flex-direction: column;
       grid-area: weekly;
 
@@ -284,7 +213,75 @@
       }
     }
   }
+  #default{
+    display: grid;
+    z-index: 1;
+    grid-area: daily;
+    margin: 0 auto 0;
+    grid-template-columns: 50% 50%;
+    grid-template-areas: 
+      "icon title"
+      "desc desc";
+    // height: 80%;
+    width: clamp(760px, 40vw, 1200px);
+    border: 1px solid rgba(0,0,0,.125);             // shorten to shorthand ?
+    border-radius: 0.5rem;
 
+
+    #icon{
+      grid-area: icon;
+
+      img{
+        width: 80%;
+        display: flex;
+        margin: 0 auto;
+      }
+    }
+
+    #title{
+      grid-area: title;
+      display: flex;
+      align-items: center;
+
+      h1{
+        display: inline-block;
+        margin: 0;
+        font-weight: bold;          // shorthand dis
+        font-size: 3.5rem;
+      }
+    }
+    
+    #desc{
+      grid-area: desc;
+      padding: 0 5%;
+      
+      p{
+        font-size: 1.5rem;
+        text-align: justify;
+      }
+
+      a{
+        color: #000000;
+
+        &:hover{
+          font-weight: bold;
+        }
+      }
+
+      #socials{
+        display: flex;
+        justify-content: center;
+        gap: 1vw;
+        margin-bottom: 1rem;                
+
+        a{  
+          img{
+            width: 3rem;
+          }       
+        }
+      }
+    }
+  }
   // Classes
   p.degree{
     font-size: 40% !important;
@@ -299,6 +296,10 @@
         width: 90% !important;
       }
     }    
+
+    #default{
+      width: 90vw;
+    }
 
     #dashboard{
       // flex-direction: column;
@@ -315,9 +316,6 @@
       }
 
       #today{
-        // height: 40%;
-        // width: 100%;
-
         #stats{
           #etc{
             .etc{
@@ -337,7 +335,6 @@
       }
 
       #weekly{
-        display: none;
         width: auto;
 
         overflow-y: scroll;
@@ -349,8 +346,12 @@
 @media (max-width: 768px){
   #App{
 
-    header{
-
+    #default{
+      #title{
+        h1{
+          font-size: 2rem;
+        }
+      }
     }
 
     #dashboard{

@@ -64,14 +64,15 @@ const WeatherApp2 = () => {
   useEffect(() => {     // Weather Data updates
     if(!$.isEmptyObject(wData)){
       // Determining proper SVG
-      let mySVG = weatherCheck(wData.id, wData.dt);
+      let mySVG = weatherCheck(wData.id, wData.dt, true);
 
-      $('#dashboard').css("grid-template-rows", "45% 30%")
+      $('#dashboard').css('display', 'grid')
+      // $('#dashboard').css("grid-template-rows", "45% 30%")
       $('#default').css('display', 'none');                         // hide default
-      $('#weekly').css('display', 'flex');                          // display dash
-      $('#today').css('display', 'grid');                           // display today
-      $('#hourly').css('display', 'block')
-      $('#chart').attr('style', 'display: block !important');       // display weather icon on today
+      // $('#weekly').css('display', 'flex');                          // display dash
+      // $('#today').css('display', 'grid');                           // display today
+      // $('#hourly').css('display', 'block')
+      // $('#chart').attr('style', 'display: block !important');       // display weather icon on today
       $('#App #dashboard #today #main img').prop('src', mySVG);     // change src to returned svg
 
       // format wData hourly for chart
@@ -191,13 +192,15 @@ const WeatherApp2 = () => {
 
   /*  weatherCheck(number)
       param 
-        {number}: props.main, >=1 digit number
+        {daily}: weather code
+        {dt}: unix time code thingy, passses onto isDay
+        {ts}: 'time sensitive' to determine if I need day/night icons as opposed to default (day)
       returns  
         {svg}: icons.xxxxx
       
       determines svg to return based on inputted number
   */ 
-  const weatherCheck = (daily, dt) => {   
+  const weatherCheck = (daily, dt, ts) => {   
     // use regex to determine what number daily starts with
     if(/^2/.test(daily.toString())){              // Thunderstorms  
       return daily === 201 ? icons.rainThunderstorm : icons.thunderstormsDefault;
@@ -208,9 +211,9 @@ const WeatherApp2 = () => {
     } else if (/^6/.test(daily.toString())){      // Snow
       return icons.snowDefault;
     } else if (/^7/.test(daily.toString())){      // Fog
-      return isDay(dt) ? icons.fogDay : icons.fogNight;
+      return ts ? isDay(dt) ? icons.fogDay : icons.fogNight : icons.fogDay;
     } else if (daily === 800){                    // Clear
-      return isDay(dt) ? icons.clearDay : icons.clearNight;
+      return ts ? isDay(dt) ? icons.clearDay : icons.clearNight : icons.clearDay;
     } else if (/^8/.test(daily.toString())){      // Cloudy
       return icons.cloudyDefault;
     }
@@ -231,28 +234,28 @@ const WeatherApp2 = () => {
               // suggestionsChange={onSuggectionChange}
             />
           </GeoapifyContext>          
-      </header>
+      </header>        
+      <div id='default' class='main'>
+        <div id='icon'>
+          <img src={icons.clearDay} alt=''/>
+        </div>
+        <div id='title'>
+          <h1>Weather<br/>App II</h1>
+        </div>
+        <div id='desc'>
+          <p>
+            A Weather Dashboard application, created by <a href='https://ben-langlois.github.io/Portfolio/'>Ben Langlois</a>, aimed to display weather statistics for inputted city. The application is
+            built in React and SASS, it utilizes multiple APIs such as: <a href='https://www.geoapify.com/address-autocomplete'>GeoApify</a>, and <a href='https://openweathermap.org/api/one-call-3'>OpenWeatherMap API</a>.<br/><br/>
+            The application allows users to search for the weather in a specific city and displays the current weather conditions along with hourly and weekly 
+            forecasts. Cards display temperatures and various stats such as: humidity, precipitation, sunrise/set etc.
+          </p>
+          <div id='socials'>
+            <a href='https://github.com/Ben-Langlois/Weather-App2'><img src={icons.github}/></a>
+            <a href='https://www.linkedin.com/in/benjaminlanglois/'><img src={icons.linkedin}/></a>
+          </div>
+        </div>
+      </div>  
       <div id='dashboard'>
-        <div id='default' class='main'>
-          <div id='icon'>
-            <img src={icons.clearDay} alt=''/>
-          </div>
-          <div id='title'>
-            <h1>Weather<br/>App II</h1>
-          </div>
-          <div id='desc'>
-            <p>
-              A Weather Dashboard application, created by <a href='https://ben-langlois.github.io/Portfolio/'>Ben Langlois</a>, aimed to display weather statistics for inputted city. The application is
-              built in React and SASS, it utilizes multiple APIs such as: <a href='https://www.geoapify.com/address-autocomplete'>GeoApify</a>, and <a href='https://openweathermap.org/api/one-call-3'>OpenWeatherMap API</a>.<br/><br/>
-              The application allows users to search for the weather in a specific city and displays the current weather conditions along with hourly and weekly 
-              forecasts. Cards display temperatures and various stats such as: humidity, precipitation, sunrise/set etc.
-            </p>
-            <div id='socials'>
-              <a href='https://github.com/Ben-Langlois/Weather-App2'><img src={icons.github}/></a>
-              <a href='https://www.linkedin.com/in/benjaminlanglois/'><img src={icons.linkedin}/></a>
-            </div>
-          </div>
-        </div>      
         <div id='today' class='main'>
           <div id='main'>
             <img src='...' alt=''/>
@@ -300,7 +303,7 @@ const WeatherApp2 = () => {
               return(
                 <div class='dayCard'>
                   <p id='day'>{i == 0 ? 'Today' : getTime(e.dt, 'day')}</p>
-                  <img src={weatherCheck(e.weather[0].id, e.dt)} />{/* Will implement getIcon or whatever its called soon */}
+                  <img src={weatherCheck(e.weather[0].id, e.dt, false)} />{/* Will implement getIcon or whatever its called soon */}
                   <p id='temp'>L: {Math.round(e.temp.min)}&nbsp;H: {Math.round(e.temp.max)}</p>
                 </div>
               )
