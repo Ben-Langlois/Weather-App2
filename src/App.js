@@ -67,12 +67,7 @@ const WeatherApp2 = () => {
       let mySVG = weatherCheck(wData.id, wData.dt, true);
 
       $('#dashboard').css('display', 'grid')
-      // $('#dashboard').css("grid-template-rows", "45% 30%")
       $('#default').css('display', 'none');                         // hide default
-      // $('#weekly').css('display', 'flex');                          // display dash
-      // $('#today').css('display', 'grid');                           // display today
-      // $('#hourly').css('display', 'block')
-      // $('#chart').attr('style', 'display: block !important');       // display weather icon on today
       $('#App #dashboard #today #main img').prop('src', mySVG);     // change src to returned svg
 
       // format wData hourly for chart
@@ -211,9 +206,16 @@ const WeatherApp2 = () => {
     } else if (/^6/.test(daily.toString())){      // Snow
       return icons.snowDefault;
     } else if (/^7/.test(daily.toString())){      // Fog
-      return ts ? isDay(dt) ? icons.fogDay : icons.fogNight : icons.fogDay;
+      if(ts === true){
+        return isDay(dt) ? icons.fogDay : icons.fogNight
+      }
+      return icons.fogDay;
     } else if (daily === 800){                    // Clear
-      return ts ? isDay(dt) ? icons.clearDay : icons.clearNight : icons.clearDay;
+      if(ts === true){
+        return isDay(dt) ? icons.clearDay : icons.clearNight;
+      }
+      return icons.clearDay;
+      // return ts == true ? isDay(dt) ? icons.clearDay : icons.clearNight : icons.clearDay;
     } else if (/^8/.test(daily.toString())){      // Cloudy
       return icons.cloudyDefault;
     }
@@ -298,17 +300,20 @@ const WeatherApp2 = () => {
         </div>        
         <div id='weekly'>
           <h2>8-Day Forecast</h2>
-          {
-            dData.map((e, i) => {
-              return(
-                <div class='dayCard'>
-                  <p id='day'>{i == 0 ? 'Today' : getTime(e.dt, 'day')}</p>
-                  <img src={weatherCheck(e.weather[0].id, e.dt, false)} />{/* Will implement getIcon or whatever its called soon */}
-                  <p id='temp'>L: {Math.round(e.temp.min)}&nbsp;H: {Math.round(e.temp.max)}</p>
-                </div>
-              )
-            })
-          }
+          <div id='card-container'>
+            {
+              dData.map((e, i) => {
+                return(
+                  <div class='dayCard'>
+                    <p id='day'>{i == 0 ? 'Today' : getTime(e.dt, 'day')}</p>
+                    <img src={weatherCheck(e.weather[0].id, e.dt, false)} />{/* Will implement getIcon or whatever its called soon */}
+                    <p id='temp'>L: {Math.round(e.temp.min)}&nbsp;H: {Math.round(e.temp.max)}</p>
+                  </div>
+                )
+              })
+            }            
+          </div>
+
         </div>
       </div>
     </div>

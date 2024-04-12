@@ -173,44 +173,52 @@
       grid-area: weekly;
 
       h2{
-        margin-bottom: 0;
+        margin: 1rem 0;
       }
 
-      .dayCard{
+      #card-container{
         display: flex;
-        justify-content: flex-start;
-        margin: 0 5%;
-        flex: 1;
+        flex-direction: column;
+        overflow-y: scroll;
+        flex: 1 1 auto;
 
-        img, p{
-          flex: 1 1;
+        .dayCard{
           display: flex;
-        }
+          justify-content: flex-start;
+          margin: 0 5%;
+          flex: 1;
 
-        img{
-          height: 3.5rem;
-          align-self: center;
-          // justify-self: start;
-        }
-
-        p{
-          align-items: center;
-          // font-size: 1.3rem;
-        }
-
-        #temp{
-          justify-content: start;
-          // flex-grow: 2;
-
-          .degree{
-            font-size: 0.8rem !important;
+          img, p{
+            flex: 1 1;
+            display: flex;
           }
-        }
-      }:nth-child(2) {    // 'today' is bolded
-        #day{
-          font-weight: bold;
-        }
+
+          img{
+            height: 3.5rem;
+            align-self: center;
+            // justify-self: start;
+          }
+
+          p{
+            align-items: center;
+            // font-size: 1.3rem;
+          }
+
+          #temp{
+            justify-content: start;
+            // flex-grow: 2;
+
+            .degree{
+              font-size: 0.8rem !important;
+            }
+          }
+        }:nth-child(1) {    // 'today' is bolded
+          #day{
+            font-weight: bold;
+          }
+        }        
       }
+
     }
   }
   #default{
@@ -336,8 +344,6 @@
 
       #weekly{
         width: auto;
-
-        overflow-y: scroll;
       }
     }
   }
