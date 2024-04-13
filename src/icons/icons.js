@@ -33,10 +33,12 @@ import clearDay from './Monochrome/wi_clear-day.svg';             // Day
 import clearNight from './Monochrome/wi_clear-night.svg';         // Night
 
 // 80x Clouds
-import cloudyDefault from './Monochrome/wi_cloudy.svg';                  // 803 Clouds Default
+// 803 Clouds Default
 // 801 Few Clouds
 // 802 Scattered Clouds
-// 804 Overcast
+import cloudyDay from './Monochrome/partly-cloudy-day.svg';             // Day
+import cloudyNight from './Monochrome/partly-cloudy-night.svg';         // Night
+import cloudyDefault from './Monochrome/wi_cloudy.svg';                 // 804 Overcast
 
 // For stats section
 import UVI from './stats/wi_uv-index.svg';
@@ -52,4 +54,4 @@ import low from './stats/wi_thermometer-colder.svg';
 import github from './socials/iconmonstr-github-3.svg';
 import linkedin from './socials/iconmonstr-linkedin-3.svg';
 
-export {clearDay, clearNight, cloudyDefault, drizzle, rainDefault, heavyRain, thunderstormsDefault, rainThunderstorm, overcastThunderstorm, snowDefault, fogDay, fogNight, UVI, humidity, sunrise, sunset, clouds, high, low, linkedin, github};
+export {clearDay, clearNight, cloudyDefault, cloudyDay, cloudyNight, drizzle, rainDefault, heavyRain, thunderstormsDefault, rainThunderstorm, overcastThunderstorm, snowDefault, fogDay, fogNight, UVI, humidity, sunrise, sunset, clouds, high, low, linkedin, github};

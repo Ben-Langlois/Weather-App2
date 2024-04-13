@@ -64,7 +64,7 @@ const WeatherApp2 = () => {
   useEffect(() => {     // Weather Data updates
     if(!$.isEmptyObject(wData)){
       // Determining proper SVG
-      let mySVG = weatherCheck(wData.id, wData.dt, true);
+      let mySVG = weatherCheck(wData.id, wData.dt, true, wData.zoneShift);
 
       $('#dashboard').css('display', 'grid')
       $('#default').css('display', 'none');                         // hide default
@@ -98,6 +98,7 @@ const WeatherApp2 = () => {
       setdData([
         ...wData.daily
       ])
+      console.log(wData)
     }
   }, [wData]);
 
@@ -139,7 +140,7 @@ const WeatherApp2 = () => {
         hourly: data.hourly.slice(0, 24)                   // limiting to 24 hours
       })
 
-      console.log(data)
+      // console.log(data)
     })
     .catch(err => {
       console.error('Call Failed', err)
@@ -179,7 +180,7 @@ const WeatherApp2 = () => {
     let time = dt * 1000,       
     date = new Date(time);    // getting date object
 
-    if (date.getHours >= 7 && date.getHours <= 19){ // if between 7am and 7pm
+    if (date.getHours() >= 7 && date.getHours() <= 19){ // if between 7am and 7pm
       return true;    // true == day
     }
     return false;     // false == night
@@ -206,18 +207,21 @@ const WeatherApp2 = () => {
     } else if (/^6/.test(daily.toString())){      // Snow
       return icons.snowDefault;
     } else if (/^7/.test(daily.toString())){      // Fog
-      if(ts === true){
-        return isDay(dt) ? icons.fogDay : icons.fogNight
-      }
+      if(ts == true)return isDay(dt) ? icons.fogDay : icons.fogNight
       return icons.fogDay;
-    } else if (daily === 800){                    // Clear
-      if(ts === true){
-        return isDay(dt) ? icons.clearDay : icons.clearNight;
-      }
-      return icons.clearDay;
       // return ts == true ? isDay(dt) ? icons.clearDay : icons.clearNight : icons.clearDay;
-    } else if (/^8/.test(daily.toString())){      // Cloudy
-      return icons.cloudyDefault;
+    } else if (/^8/.test(daily.toString())){      // Clear & Cloudy
+      if (daily === 800){                         // Clear
+        if(ts == true)return isDay(dt) ? icons.clearDay : icons.clearNight;
+        return icons.clearDay;
+      }
+      if (daily === 804){                         // Cloudy
+        return icons.cloudyDefault
+      }else{
+        if(ts == true)return isDay(dt) ? icons.cloudyDay : icons.cloudyNight;
+        return icons.cloudyDay;
+      }
+
     }
   }
 
