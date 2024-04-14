@@ -179,7 +179,6 @@
       #card-container{
         display: flex;
         flex-direction: column;
-        overflow-y: scroll;
         flex: 1 1 auto;
 
         .dayCard{
@@ -344,6 +343,10 @@
 
       #weekly{
         width: auto;
+
+        #card-container{
+          overflow-y: scroll; 
+        }
       }
     }
   }

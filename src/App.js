@@ -8,6 +8,8 @@ import '@geoapify/geocoder-autocomplete/styles/minimal.css';
 import { Line, CategoryScale } from 'react-chartjs-2';
 import { Chart } from "chart.js/auto";
 import { getByDisplayValue } from '@testing-library/react';
+import {Helmet} from "react-helmet";
+
 
 
 const autocompleteKey = '62e93b34c2ee4337b92e9b81d777029a';
@@ -49,7 +51,7 @@ const WeatherApp2 = () => {
 
   // componentDidMount (essentially)
   useEffect (() => {
-    console.log('Mounted');
+    // console.log('Mounted');
   }, []);
 
   // componentDidUpdate
@@ -77,7 +79,7 @@ const WeatherApp2 = () => {
       // - should just be 3pm, 4pm, 5pm, 6pm etc
       let times = [];
       wData.hourly.map((e, i) => {
-        times[i] = getTime(e.dt, 'time')
+        times[i] = getTime(e.dt)
       })
 
       // Data
@@ -98,7 +100,7 @@ const WeatherApp2 = () => {
       setdData([
         ...wData.daily
       ])
-      console.log(wData)
+      // console.log(wData)
     }
   }, [wData]);
 
@@ -148,26 +150,33 @@ const WeatherApp2 = () => {
   }
 
   /*  getTime
-    params
-      {dt}: unix time thingy
-      {shift}: zone-shift variable 
-      {rv}: return value
-    returns
-      {date}: shortened converted date (11:30, 03:20 etc)
+      params
+        {dt}: unix time thingy
+      returns
+        {date}: shortened converted date (11:30am , 3:20pm etc)
   */
-  const getTime = (dt, rv) => {
+  const getTime = (dt) => {
     let time = dt * 1000,
         date = new Date(time);
 
-    if(rv === 'time'){  // if user requests the time
-      if(date.getHours() > 12){
-        return (date.getMinutes() < 10 ? `${date.getHours() - 12}:0${date.getMinutes()} pm` : `${date.getHours() - 12}:${date.getMinutes()} pm`)
-      } else {
-        return (date.getMinutes() < 10 ? `${date.getHours()}:0${date.getMinutes()} am` : `${date.getHours()}:${date.getMinutes()} am`)
-      }
-    } else if(rv === 'day'){  // if user requests the day 
-      return weekdays.slice(date.getDay(), date.getDay() + 1) // returns day of the week corresponding to dt
+    if(date.getHours() > 12){
+      return (date.getMinutes() < 10 ? `${date.getHours() - 12}:0${date.getMinutes()} pm` : `${date.getHours() - 12}:${date.getMinutes()} pm`)
+    } else {
+      return (date.getMinutes() < 10 ? `${date.getHours()}:0${date.getMinutes()} am` : `${date.getHours()}:${date.getMinutes()} am`)
     }
+  }
+
+  /*  getDay
+      params
+        {dt}: unix time thingy
+      returns
+        {day}: day of the week
+  */
+  const getDay = (dt) => {
+    let time = dt * 1000,
+    date = new Date(time);
+
+    return weekdays.slice(date.getDay(), date.getDay() + 1) // returns day of the week corresponding to dt
   }
 
   /*  isDay
@@ -207,26 +216,42 @@ const WeatherApp2 = () => {
     } else if (/^6/.test(daily.toString())){      // Snow
       return icons.snowDefault;
     } else if (/^7/.test(daily.toString())){      // Fog
-      if(ts == true)return isDay(dt) ? icons.fogDay : icons.fogNight
+      if(ts)return isDay(dt) ? icons.fogDay : icons.fogNight
       return icons.fogDay;
       // return ts == true ? isDay(dt) ? icons.clearDay : icons.clearNight : icons.clearDay;
     } else if (/^8/.test(daily.toString())){      // Clear & Cloudy
-      if (daily === 800){                         // Clear
-        if(ts == true)return isDay(dt) ? icons.clearDay : icons.clearNight;
-        return icons.clearDay;
+      switch(daily) {
+        case 800:
+          if(ts)return isDay(dt) ? icons.clearDay : icons.clearNight;
+          return icons.clearDay;
+        case 801:
+        case 802:
+          if(ts)return isDay(dt) ? icons.cloudyDay : icons.cloudyNight;
+          return icons.cloudyDay;
+        case 803:
+          if (ts)return isDay(dt) ? icons.overcastDay : icons.overcastNight;
+          return icons.overcastDay;
+        case 804:
+          return icons.cloudyDefault;
       }
-      if (daily === 804){                         // Cloudy
-        return icons.cloudyDefault
-      }else{
-        if(ts == true)return isDay(dt) ? icons.cloudyDay : icons.cloudyNight;
-        return icons.cloudyDay;
-      }
-
+      // if (daily === 800){                         // Clear
+      //   if(ts == true)return isDay(dt) ? icons.clearDay : icons.clearNight;
+      //   return icons.clearDay;
+      // } else if (daily === 804){                         // Cloudy
+      //   return icons.cloudyDefault
+      // }else{
+      //   if(ts == true)return isDay(dt) ? icons.cloudyDay : icons.cloudyNight;
+      //   return icons.cloudyDay;
+      // }
     }
   }
 
   return (
     <div id="App">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Ben's Weather App</title>
+      </Helmet>
       <header id="search-bar">
           <GeoapifyContext id='input-container' apiKey={autocompleteKey}>
             <GeoapifyGeocoderAutocomplete placeholder="Enter address here"
@@ -273,7 +298,7 @@ const WeatherApp2 = () => {
           </div>
           <div id='stats'>
             <h3 id='feelsLike'>Feels like {wData.feelsLike}</h3>
-            <h3 id='asOf'>As of {getTime(wData.dt, 'time')}</h3>
+            <h3 id='asOf'>As of {getTime(wData.dt)}</h3>
             <div id='etc'>
               <div id='uvi' className='etc' title='Cloud Coverage'> {/* should eventually convert css to reflect actual value*/}
                 <img src={icons.clouds} alt='...' />
@@ -285,15 +310,14 @@ const WeatherApp2 = () => {
               </div>      
               <div id='sunr' className='etc' title='Sunrise'>
                 <img src={icons.sunrise} alt='...'/>
-                <p>{getTime(wData.sunrise, 'time')}</p>
+                <p>{getTime(wData.sunrise)}</p>
               </div>
               <div id='suns' className='etc' title='Sunset'>
                 <img src={icons.sunset} alt='...'/>
-                <p>{getTime(wData.sunset, 'time')}</p>
+                <p>{getTime(wData.sunset)}</p>
               </div>   
             </div>
           </div>
-
         </div>
         <div id='hourly'>
           <Line
@@ -309,7 +333,7 @@ const WeatherApp2 = () => {
               dData.map((e, i) => {
                 return(
                   <div class='dayCard'>
-                    <p id='day'>{i == 0 ? 'Today' : getTime(e.dt, 'day')}</p>
+                    <p id='day'>{i == 0 ? 'Today' : getDay(e.dt)}</p>
                     <img src={weatherCheck(e.weather[0].id, e.dt, false)} />{/* Will implement getIcon or whatever its called soon */}
                     <p id='temp'>L: {Math.round(e.temp.min)}&nbsp;H: {Math.round(e.temp.max)}</p>
                   </div>
@@ -317,7 +341,6 @@ const WeatherApp2 = () => {
               })
             }            
           </div>
-
         </div>
       </div>
     </div>
